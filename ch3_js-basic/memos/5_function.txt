@@ -1,0 +1,132 @@
+---------------------------------------------------------------------
+
+함수: 객체의 특별한 형태로, statement로 구성된 실행단위
+- 이름, 매개변수, 몸체로 구성
+- return을 명시적으로 하지 않으면 undefined가 리턴
+- 매개변수는 지역변수 취급 (arguments => parameter)
+
+
+- first-class-function
+ => 변수에 할당가능
+ => 함수의 매개변수 / 리턴값으로 활용 가능
+
+---------------------------------------------------------------------
+
+1. function 키워드로 정의
+- 호이스팅됨
+
+function func1(a) {
+  // body
+}
+
+
+2. 함수표현식
+- 익명 함수를 변수에 할당
+- 호이스팅되지 않음
+
+const multiply = function(a, b) {
+  return a * b;
+}
+
+
+3. 화살표 함수
+- 항상 익명함수, 생성자로 사용불가
+- 매개변수 하나면 괄호 생략가능
+- 조건부로 {}나 return을 생략가능
+
+- this와 arguments를 바인딩하지 않음
+- 선언되는 위치에 따라 this가 결정
+ => 화살표 함수를 감싸고 있는 lexcial scope의 this를 채용
+ => call, apply, bind로 변경 불가
+
+
+
+---------------------------------------------------------------------
+
+화살표함수를 제외한 함수에서는 arguments라는 객체를 사용가능
+나머지 연산자로 대체가능
+
+const sum = (...args) => {
+  console.log(args)
+}
+
+const sum = (type, ...args) => {
+  args.forEach((arg) => {
+  })
+}
+
+---------------------------------------------------------------------
+
+this
+- 함수에서 사용가능한 특별한 키워드
+- 전역에서는 항상 전역객체(window, global)
+
+
+일반적으로 함수의 호출방법에 따라 변동됨 
+- 함수 호출의 주체 => A.func()
+
+생성자함수
+- 새로운 객체를 생성하여 this에 바인딩
+- this를 통해 인스턴스 자체에 접근, return
+- 생성된 객체는 생성자의 prototype 프로퍼티에 해당하는 객체를
+  프로토타입으로 설정
+
+---------------------------------------------------------------------
+
+명시적 바인딩
+- this로 바인딩될 객체를 임의로 변경
+
+1. call
+- 즉시 함수를 호출하는데 this로 하고싶은 객체를 입력받음
+- 첫번째 이후의 arguments는 함수에 전달
+
+// 예제1 시작
+const obj = { name: 'javascript' };
+
+function greeting() {
+  return `Hello ${this.name}`;
+}
+greeting.call(obj); 
+// 예제1 끝
+
+
+// 예제2 시작
+const obj = { name: "Lee" };
+
+function getUserInfo(age, country) {
+  return `name: ${this.name}, age: ${age}, country: ${country}`;
+}
+getUserInfo.call(obj, 20, 'Korea');
+// 예제2 끝
+
+
+2. apply
+- call과 유사하나 함수에 전달할 인자는 배열로 전달
+
+const obj = { name: "Lee" };
+
+function getUserInfo(age, country) {
+  return `name: ${this.name}, age: ${age}, country: ${country}`;
+}
+getUserInfo.apply(obj, [20, 'Korea'])
+
+
+3. bind
+- 함수의 this바인딩을 영구적으로 변경 (비가역적)
+- 바로 호출되지 않고 새로운 함수를 리턴
+- 호출방법에 관계없이 this를 결정
+
+const obj1 = { name: "Lee" };
+const obj2 = { name: "Han" };
+
+function getUserInfo(age, country) {
+  return `name: ${this.name}, age: ${age}, country: ${country}`;
+}
+
+const bound = getUserInfo.bind(obj1);
+
+bound(20, 'Korea'); // Lee, 20, Korea
+bound.apply(obj2, [20, 'Korea']); // Lee, 20, Korea
+// obj2로 바뀌지 않음
+
+---------------------------------------------------------------------

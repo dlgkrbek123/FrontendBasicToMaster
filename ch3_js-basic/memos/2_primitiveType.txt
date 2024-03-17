@@ -1,0 +1,50 @@
+---------------------------------------------------------------------
+
+프리미티브 타입
+- 불변 데이터
+
+string, number, boolean
+undefined, null
+BigInt, Symbol
+
+---------------------------------------------------------------------
+
+NaN: not a number
+- 읽기전용 속성
+- 숫자인지 아닌지 알 수 있으며, isNaN으로 판별
+
+Number.MAX_VALUE, Number.MIN_VALUE
+Number.MAX_SAFE_INTEGER, Number.MIN_SAFE_INTEGER
+
+number의 소수점 연산은 근삿값
+Number.EPSILON을 활용해서 근삿값에 대한 불안을 덜 수 있다.
+=> let equal = Math.abs(a + b - c) < Number.EPSILON
+
+---------------------------------------------------------------------
+
+Symbol
+=> 데이터의 유일함을 나타날때 사용
+=> Symbol(), new를 사용하지 않고 생성
+
+const sym1 = Symbol("key");
+const sym2 = Symbol("key");
+
+sym1 === sym2; // false
+
+
+// 전역심볼 생성
+const sym1 = Symbol.for("myApp.key");
+console.log(sym1 === Symbol.for('myApp.key')); // true
+
+
+유니크한 프로퍼티 이름을 만들때 사용
+
+const user = {
+  name: 'javascript',
+}
+const id = Symbol('id');
+
+user[id] = 'firstId'; // id프로퍼티는 다른 객체와는 이름이 다름
+console.log(user[Symbol('id')]); // undefined
+
+---------------------------------------------------------------------
