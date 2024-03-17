@@ -1,0 +1,74 @@
+---------------------------------------------------------------------
+
+HTML: 마크업 구성하는 언어
+- 느슨한 문법을 가져서 잘못 작성해도 전체 렌더링 실패 및 에러 노출 X
+
+- element는 시작 태그 / 내용 / 종료태그 로 구성됨
+- void요소는 닫는 태그가 없이도 동작
+
+- attribute는 태그의 동작을 제어하도록 사용자가 지정하는 값
+- id, class, style처럼 모든 요소의 공통 attribute도 있지만, 특정태그만
+  사용하는 attribute도 있다.
+
+---------------------------------------------------------------------
+
+요소 분류
+
+inline
+- 태그가 할당된 텍스트나 이미지의 크게이 맞는 필요한 공간만을 차지
+- width, height 지정불가
+- span, img, button
+
+block
+- 독립적인 한라인을 차지
+- div, article, form
+
+- block은 block, inline을 포함할 수 있지만, inline은 inline만을 포함
+
+---------------------------------------------------------------------
+
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <title>제목</title>
+    <meta charset="UTF-8" />
+  </head>
+  <body></body>
+</html>
+
+
+DOCTYPE
+- 문서의 타입을 지정
+
+html의 lang이 스크린리더등에 영향을 끼치므로 나라에 맞게 잘 넣자
+head는 문서의 제목과 인코딩 형식등을 지정
+
+
+의미에 맞게 태그를 작성하자
+- div말고 아래의 요소로 구성
+- header, main, footer, nav, aside
+- section, article
+
+h1 ~ h6 : 섹션의 제목
+header  : 섹션의 제목이나 대표이미지
+
+<body>
+  <header></header>
+  <main>
+    <section></section> 
+    <section></section> 
+    <section></section> 
+  </main>
+  <footer></footer>
+</body>
+
+---------------------------------------------------------------------
+
+SEO: 검색엔진 최적화
+- 시맨틱한 HTML 작성
+- meta태그 활용
+  - <meta name="description" content="설명" />
+  - <meta charset="UTF-8" />
+  - <meta property="og:title" content="페이지명" />
+
+---------------------------------------------------------------------
